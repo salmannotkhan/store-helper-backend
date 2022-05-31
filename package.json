@@ -1,0 +1,33 @@
+{
+    "name": "store-helper-backend",
+    "version": "1.0.0",
+    "type": "module",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node .",
+        "dev": "nodemon index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/salmannotkhan/store-helper-backend.git"
+    },
+    "author": "Salman Shaikh <tony903212@gmail.com>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/salmannotkhan/store-helper-backend/issues"
+    },
+    "homepage": "https://github.com/salmannotkhan/store-helper-backend#readme",
+    "description": "",
+    "dependencies": {
+        "body-parser": "^1.20.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.1",
+        "express": "^4.18.1",
+        "mongoose": "^6.3.5",
+        "morgan": "^1.10.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.16"
+    }
+}
