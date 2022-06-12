@@ -20,6 +20,7 @@
     "homepage": "https://github.com/salmannotkhan/store-helper-backend#readme",
     "description": "",
     "dependencies": {
+        "ably": "^1.2.22",
         "body-parser": "^1.20.0",
         "cors": "^2.8.5",
         "dotenv": "^16.0.1",
