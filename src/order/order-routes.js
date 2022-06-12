@@ -4,20 +4,26 @@ import orderQueries from "./order-queries.js";
 
 const orderRouter = Router();
 
-orderRouter.get("/", (_req, res) => {
-    const orderQueue = orderQueries.fetchAllOrders();
+orderRouter.get("/", async (_req, res) => {
+    const orderQueue = await orderQueries.fetchAllOrders();
     res.status(200).json(orderQueue);
 });
 
-orderRouter.post("/", (req, res) => {
-    const orderQueue = orderQueries.createOrder(req.body);
-    ablyChannels.orderQueueChannel.publish("update", orderQueue);
+orderRouter.post("/", async (req, res) => {
+    const orderQueue = await orderQueries.createOrder(req.body);
+    ablyChannels.orderQueueChannel.publish("added", orderQueue);
     res.status(200).json({ status: "OK" });
 });
 
-orderRouter.delete("/:id", (req, res) => {
-    const orderQueue = orderQueries.completeOrder(req.params.id);
-    ablyChannels.orderQueueChannel.publish("update", orderQueue);
+orderRouter.delete("/:id", async (req, res) => {
+    const orderQueue = await orderQueries.completeOrder(req.params.id);
+    ablyChannels.orderQueueChannel.publish("completed", req.params.id);
+    res.status(200).json({ status: "OK" });
+});
+
+orderRouter.put("/:id", async (req, res) => {
+    const orderQueue = await orderQueries.processingOrder(req.params.id);
+    ablyChannels.orderQueueChannel.publish("update", req.params.id);
     res.status(200).json({ status: "OK" });
 });
 
