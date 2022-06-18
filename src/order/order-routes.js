@@ -10,19 +10,19 @@ orderRouter.get("/", async (_req, res) => {
 });
 
 orderRouter.post("/", async (req, res) => {
-    const orderQueue = await orderQueries.createOrder(req.body);
-    ablyChannels.orderQueueChannel.publish("added", orderQueue);
-    res.status(200).json({ status: "OK" });
+    const order = await orderQueries.createOrder(req.body);
+    ablyChannels.orderQueueChannel.publish("added", order);
+    res.status(200).json({ status: "OK", orderId: order._id });
 });
 
 orderRouter.delete("/:id", async (req, res) => {
-    const orderQueue = await orderQueries.completeOrder(req.params.id);
+    await orderQueries.completeOrder(req.params.id);
     ablyChannels.orderQueueChannel.publish("completed", req.params.id);
     res.status(200).json({ status: "OK" });
 });
 
 orderRouter.put("/:id", async (req, res) => {
-    const orderQueue = await orderQueries.processingOrder(req.params.id);
+    await orderQueries.processingOrder(req.params.id);
     ablyChannels.orderQueueChannel.publish("update", req.params.id);
     res.status(200).json({ status: "OK" });
 });

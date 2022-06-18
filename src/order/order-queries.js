@@ -22,7 +22,6 @@ const processingOrder = async (orderId) => {
 };
 
 const createOrder = async (orderDetails) => {
-    console.log(orderDetails);
     const order = await Order.create(orderDetails);
     return order;
 };
