@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
-
-const schemaOptions = {
-    timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" },
-};
+import schemaOptions from "../common/schemaOptions.js";
 
 const orderSchema = mongoose.Schema(
     {
@@ -15,7 +12,8 @@ const orderSchema = mongoose.Schema(
             required: true,
         },
         service: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "service",
             required: true,
         },
         status: {
