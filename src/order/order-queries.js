@@ -1,7 +1,9 @@
 import Order from "./order-models.js";
 
 const fetchAllOrders = async () => {
-    const orderQueue = await Order.find({ status: { $ne: "completed" } });
+    const orderQueue = await Order.find({
+        status: { $ne: "completed" },
+    }).populate("service");
     return orderQueue;
 };
 
